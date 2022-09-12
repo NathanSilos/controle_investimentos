@@ -1,0 +1,20 @@
+Tipo de investimento,Especidade,Codigo,Setor,data_compra,Valor Compra,Quantidade
+Renda Variável,Ações,ITSA4,Holding,25/02/2022,"9,93",25
+Renda Variável,Ações,ITSA4,Holding,02/03/2022,"9,16",51
+Renda Variável,Ações,ITSA4,Holding,19/03/2022,"9,42",5
+Renda Variável,Ações,BBSE3,Seguros,06/07/2022,"25,07",30
+Renda Variável,Ações,SAPR4,Saneamento,06/07/2022,"3,64",100
+Renda Variável,Ações,ENBR3,Energia,01/04/2022,"23,81",20
+Renda Variável,Ações,ENBR3,Energia,01/05/2022,"20,89",50
+Renda Variável,Ações,ENBR3,Energia,30/05/2022,"21,66",50
+Renda Variável,Ações,ENBR3,Energia,04/07/2022,"20,55",50
+Renda Variável,Ações,MGLU3,Varejo,20/04/2022,"5,95",20
+Renda Variável,Ações,MGLU3,Varejo,20/04/2022,"5,74",5
+Renda Variável,Ações,MGLU3,Varejo,02/05/2022,"4,88",100
+Renda Variável,Ações,MGLU3,Varejo,30/05/2022,"3,82",1
+Renda Variável,Ações,MGLU3,Varejo,30/05/2022,"3,81",99
+Renda Variável,Ações,MGLU3,Varejo,15/06/2022,"2,57",7
+Renda Variável,Ações,MGLU3,Varejo,21/05/2022,"2,51",5
+Renda Variável,Ações,MGLU3,Varejo,04/07/2022,"2,16",30
+Renda Variável,Ações,AESB3,Energia,17/06/2022,"14,37",30
+Renda Variável,Ações,BBAS3,Financeiro,19/07/2022,"33,87",100
