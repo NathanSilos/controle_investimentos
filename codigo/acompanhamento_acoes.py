@@ -50,18 +50,19 @@ def verifica_acoes_hoje(base, sum):
         
     cotacao.reset_index()
 
-    cotacao = cotacao.drop(columns=['High','Low','Open','Volume'])
+    cotacao = cotacao.drop(columns=['High','Low','Open','Volume','Adj Close'])
 
     base_completa = base_compra.merge(cotacao, how='left', left_on=['Codigo'], right_on=['acao'])
     base_completa
 
     base_completa['fechamento']= base_completa['Close'].round(2)
-    base_completa['preco_ajustado']= base_completa['Adj Close'].round(2)
+    # Inclusao do preço ajustado
+    # base_completa['preco_ajustado']= base_completa['Adj Close'].round(2)
 
     base_completa['Valor Compra'] = base_completa['Valor Compra'].str.replace(',','.')
     base_completa['Valor Compra'] = pd.to_numeric(base_completa['Valor Compra'])
 
-    base_completa.drop(columns=['Close','Adj Close','acao'],inplace=True)
+    base_completa.drop(columns=['Close','acao'],inplace=True)
 
     base_completa['total_investido_compra'] = base_completa['Valor Compra'] * base_completa['Quantidade']
     base_completa['total_investido_hoje'] = base_completa['fechamento'] * base_completa['Quantidade']
@@ -78,9 +79,9 @@ def verifica_acoes_hoje(base, sum):
 
     # Funcao sumarizada
     base_completa2 = base_completa.drop(columns=[ 'data_compra',
-        'Valor Compra', 'Quantidade', 'fechamento', 'preco_ajustado','ganho_perda_hoje_percentual'])
+        'Valor Compra', 'Quantidade', 'fechamento','ganho_perda_hoje_percentual'])
 
-    base_completa2.groupby(['Tipo de investimento', 'Especidade', 'Codigo', 'Setor']).sum().reset_index()
+    base_completa2.groupby(['Codigo']).sum().reset_index()
 
     if sum:
         return base_completa2
