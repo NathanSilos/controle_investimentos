@@ -1,7 +1,8 @@
 from pandas_datareader import data as web
 import pandas as pd
 import datetime as dt
-import datetime as dt
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 def leitura_base():
     base_compra = pd.read_csv(r'C:\Users\natha\Documents\01-Projetos\carteira_ações\base_compras_acoes.csv')
@@ -77,11 +78,31 @@ def verifica_acoes_hoje(base, sum):
     if sum == False:
         return base_completa
 
-    # Funcao sumarizada
-    base_completa2 = base_completa.drop(columns=[ 'data_compra',
-        'Valor Compra', 'Quantidade', 'fechamento','ganho_perda_hoje_percentual'])
-
-    base_completa2.groupby(['Codigo']).sum().reset_index()
-
     if sum:
+         # Funcao sumarizada
+        base_completa2 = base_completa.drop(columns=[ 'data_compra',
+            'Valor Compra', 'Quantidade', 'fechamento','ganho_perda_hoje_percentual'])
+
+        base_completa2 = base_completa2.groupby(['Codigo'],).sum().reset_index()
         return base_completa2
+
+def gera_pizza(df):
+    acoes = df['Codigo']
+    total_investido = df['total_investido_hoje']
+    
+    plt.pie(total_investido,
+    labels=acoes,
+    autopct='%1.1f%%',
+    labeldistance=1.4,
+    pctdistance=0.85)
+    # plt.title('Divisão da Carteira')
+    fig = plt.gcf()
+    fig.set_size_inches((2.5, 1.7))
+    return fig
+    
+
+def desenha_grafico(canvas, figure):
+    figure_canvas = FigureCanvasTkAgg(figure, canvas)
+    figure_canvas.draw()
+    figure_canvas.get_tk_widget().pack(side='top', fill='both', expand=1)
+    return figure_canvas

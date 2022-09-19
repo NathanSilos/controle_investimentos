@@ -2,6 +2,7 @@ from ctypes import alignment
 from email import header
 from tkinter import Scrollbar, font
 from turtle import color, left, right
+from weakref import finalize
 import PySimpleGUI as sg
 import datetime as dt
 import acompanhamento_acoes
@@ -125,7 +126,9 @@ tabela_compras = [[
                         )
                         ]]
 
-graficos = [[sg.Text('Graficos', font='Any 16')]]
+graficos = [
+    [sg.Text('Graficos', font='Any 16')],
+    [sg.Canvas(size=(200, 180), key='grafico_pizza', background_color='white', )]]
 
 layout = [[sg.Column(barra_titulo, size=(1070, 30), pad=(0,0), background_color=DARK_HEADER_COLOR)],
         #   [sg.Column(top, size=(920, 90), pad=BPAD_TOP)],
@@ -135,7 +138,11 @@ layout = [[sg.Column(barra_titulo, size=(1070, 30), pad=(0,0), background_color=
                     [sg.Column(graficos,size=(800, 225))]], pad=BPAD_LEFT, background_color=BORDER_COLOR)]]
         #    pad=BPAD_RIGHT
 
-window = sg.Window('Stock Wallet', layout, margins=(0,0), background_color=BORDER_COLOR, grab_anywhere=True)
+window = sg.Window('Stock Wallet', layout, margins=(0,0), background_color=BORDER_COLOR, grab_anywhere=True, finalize=True)
+
+# Inclui o grafico de pizza no painel
+acompanhamento_acoes.desenha_grafico(window['grafico_pizza'].TKCanvas, acompanhamento_acoes.gera_pizza(acoes_sumarizada))
+
 
 while True:      
     event, values = window.read()
